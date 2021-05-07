@@ -1,0 +1,8 @@
+## build microbenchmarks
+mvn clean verify
+
+## run microbenchmarks
+java -jar target/benchmarks.jar
+
+## see benchmark options
+java -jar target/benchmarks.jar -help
