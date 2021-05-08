@@ -16,60 +16,56 @@ public class MyDeque<E> {
 
     public synchronized void addFirst(E data) {
         checkNonNull(data);
-        if (head == null) {
-            tail = head = new Node<E>(data, null, null);
-        } else {
-            Node<E> node = new Node<>(data, null, head);
+        Node<E> node = new Node<>(data, null, head);
+        if (head != null) {
             head.prev = node;
-            head = node;
+        } else {
+            tail = node;
         }
+        head = node;
         size++;
     }
 
     public synchronized void addLast(E data) {
         checkNonNull(data);
-        if (tail == null) {
-            head = tail = new Node<E>(data, null, null);
-        } else {
-            Node<E> node = new Node<>(data, tail, null);
+        Node<E> node = new Node<>(data, tail, null);
+        if (tail != null) {
             tail.next = node;
-            tail = node;
+        } else {
+            head = node;
         }
+        tail = node;
         size++;
     }
 
     public synchronized E removeFirst() {
         if (head != null) {
             E data = head.data;
-            Node next = head.next;
-            if (next != null) {
-                head.next = null;
-                next.prev = null;
-                head = next;
-            } else {
-                head = tail = null;
+            head = head.next;
+            if (head != null) {
+                head.prev.next = null;
+                head.prev = null;
             }
             size--;
             return data;
+        } else {
+            return null;
         }
-        return null;
     }
 
     public synchronized E removeLast() {
         if (tail != null) {
             E data = tail.data;
-            Node prev = tail.prev;
-            if (prev != null) {
-                tail.prev = null;
-                prev.next = null;
-                tail = prev;
-            } else {
-                head = tail = null;
+            tail = tail.prev;
+            if (tail != null) {
+                tail.next.prev = null;
+                tail.next = null;
             }
             size--;
             return data;
+        } else {
+            return null;
         }
-        return null;
     }
 
     public synchronized E peekFirst() {
@@ -103,8 +99,8 @@ public class MyDeque<E> {
     }
 
     private class Node<E> {
-        public E data;
-        public Node<E> prev, next;
+        public volatile E data;
+        public volatile Node<E> prev, next;
 
         public Node(E data, Node<E> prev, Node<E> next) {
             this.data = data;
