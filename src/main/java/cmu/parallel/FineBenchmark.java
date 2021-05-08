@@ -20,130 +20,140 @@ public class FineBenchmark {
      */
     @Benchmark
     @Group("fine_most_read")
-    @GroupThreads(8)
+    @GroupThreads(30)
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void fineMostReadPeekFirst(Blackhole blackhole) {
+    public void fineMostReadRead(Blackhole blackhole) {
         blackhole.consume(fine.peekFirst());
-    }
-
-    @Benchmark
-    @Group("fine_most_read")
-    @GroupThreads(8)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void fineMostReadPeekLast(Blackhole blackhole) {
         blackhole.consume(fine.peekLast());
-    }
-
-    @Benchmark
-    @Group("fine_most_read")
-    @GroupThreads(8)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void fineMostReadSize(Blackhole blackhole) {
         blackhole.consume(fine.size());
     }
 
+//    @Benchmark
+//    @Group("fine_most_read")
+//    @GroupThreads(8)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void fineMostReadPeekLast(Blackhole blackhole) {
+//        blackhole.consume(fine.peekLast());
+//    }
+//
+//    @Benchmark
+//    @Group("fine_most_read")
+//    @GroupThreads(8)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void fineMostReadSize(Blackhole blackhole) {
+//        blackhole.consume(fine.size());
+//    }
+
     @Benchmark
     @Group("fine_most_read")
     @GroupThreads(2)
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void fineMostReadAddFirst(Blackhole blackhole) {
+    public void fineMostReadWrite(Blackhole blackhole) {
         fine.addFirst(48578);
-    }
-
-    @Benchmark
-    @Group("fine_most_read")
-    @GroupThreads(2)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void fineMostReadAddLast(Blackhole blackhole) {
         fine.addLast(485567);
-    }
-
-    @Benchmark
-    @Group("fine_most_read")
-    @GroupThreads(2)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void fineMostReadRemoveFirst(Blackhole blackhole) {
+        blackhole.consume(fine.removeLast());
         blackhole.consume(fine.removeFirst());
     }
 
-    @Benchmark
-    @Group("fine_most_read")
-    @GroupThreads(2)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void fineMostReadRemoveLast(Blackhole blackhole) {
-        blackhole.consume(fine.removeLast());
-    }
+//    @Benchmark
+//    @Group("fine_most_read")
+//    @GroupThreads(2)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void fineMostReadAddLast(Blackhole blackhole) {
+//        fine.addLast(485567);
+//    }
+//
+//    @Benchmark
+//    @Group("fine_most_read")
+//    @GroupThreads(2)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void fineMostReadRemoveFirst(Blackhole blackhole) {
+//        blackhole.consume(fine.removeFirst());
+//    }
+//
+//    @Benchmark
+//    @Group("fine_most_read")
+//    @GroupThreads(2)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void fineMostReadRemoveLast(Blackhole blackhole) {
+//        blackhole.consume(fine.removeLast());
+//    }
 
     /**
      * most write test case
      */
     @Benchmark
     @Group("fine_most_write")
-    @GroupThreads(1)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void fineMostWritePeekFirst(Blackhole blackhole) {
-        blackhole.consume(fine.peekFirst());
-    }
-
-    @Benchmark
-    @Group("fine_most_write")
-    @GroupThreads(1)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void fineMostWritePeekLast(Blackhole blackhole) {
-        blackhole.consume(fine.peekLast());
-    }
-
-    @Benchmark
-    @Group("fine_most_write")
     @GroupThreads(2)
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void fineMostWriteSize(Blackhole blackhole) {
+    public void fineMostWriteRead(Blackhole blackhole) {
+        blackhole.consume(fine.peekFirst());
+        blackhole.consume(fine.peekLast());
         blackhole.consume(fine.size());
     }
 
+//    @Benchmark
+//    @Group("fine_most_write")
+//    @GroupThreads(1)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void fineMostWritePeekLast(Blackhole blackhole) {
+//        blackhole.consume(fine.peekLast());
+//    }
+//
+//    @Benchmark
+//    @Group("fine_most_write")
+//    @GroupThreads(2)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void fineMostWriteSize(Blackhole blackhole) {
+//        blackhole.consume(fine.size());
+//    }
+
     @Benchmark
     @Group("fine_most_write")
-    @GroupThreads(7)
+    @GroupThreads(30)
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void fineMostWriteAddFirst(Blackhole blackhole) {
         fine.addFirst(48578);
-    }
-
-    @Benchmark
-    @Group("fine_most_write")
-    @GroupThreads(7)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void fineMostWriteAddLast(Blackhole blackhole) {
         fine.addLast(485567);
-    }
-
-    @Benchmark
-    @Group("fine_most_write")
-    @GroupThreads(7)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void fineMostWriteRemoveFirst(Blackhole blackhole) {
+        blackhole.consume(fine.removeLast());
         blackhole.consume(fine.removeFirst());
     }
 
-    @Benchmark
-    @Group("fine_most_write")
-    @GroupThreads(7)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void fineMostWriteRemoveLast(Blackhole blackhole) {
-        blackhole.consume(fine.removeLast());
-    }
+//    @Benchmark
+//    @Group("fine_most_write")
+//    @GroupThreads(7)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void fineMostWriteAddLast(Blackhole blackhole) {
+//        fine.addLast(485567);
+//    }
+//
+//    @Benchmark
+//    @Group("fine_most_write")
+//    @GroupThreads(7)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void fineMostWriteRemoveFirst(Blackhole blackhole) {
+//        blackhole.consume(fine.removeFirst());
+//    }
+//
+//    @Benchmark
+//    @Group("fine_most_write")
+//    @GroupThreads(7)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void fineMostWriteRemoveLast(Blackhole blackhole) {
+//        blackhole.consume(fine.removeLast());
+//    }
 }

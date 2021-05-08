@@ -20,130 +20,140 @@ public class CoarseBenchmark {
      */
     @Benchmark
     @Group("coarse_most_read")
-    @GroupThreads(8)
+    @GroupThreads(30)
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void coarseMostReadPeekFirst(Blackhole blackhole) {
+    public void coarseMostReadRead(Blackhole blackhole) {
         blackhole.consume(coarse.peekFirst());
-    }
-
-    @Benchmark
-    @Group("coarse_most_read")
-    @GroupThreads(8)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void coarseMostReadPeekLast(Blackhole blackhole) {
         blackhole.consume(coarse.peekLast());
-    }
-
-    @Benchmark
-    @Group("coarse_most_read")
-    @GroupThreads(8)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void coarseMostReadSize(Blackhole blackhole) {
         blackhole.consume(coarse.size());
     }
 
+//    @Benchmark
+//    @Group("coarse_most_read")
+//    @GroupThreads(8)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void coarseMostReadPeekLast(Blackhole blackhole) {
+//        blackhole.consume(coarse.peekLast());
+//    }
+//
+//    @Benchmark
+//    @Group("coarse_most_read")
+//    @GroupThreads(8)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void coarseMostReadSize(Blackhole blackhole) {
+//        blackhole.consume(coarse.size());
+//    }
+
     @Benchmark
     @Group("coarse_most_read")
     @GroupThreads(2)
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void coarseMostReadAddFirst(Blackhole blackhole) {
+    public void coarseMostReadWrite(Blackhole blackhole) {
         coarse.addFirst(48578);
-    }
-
-    @Benchmark
-    @Group("coarse_most_read")
-    @GroupThreads(2)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void coarseMostReadAddLast(Blackhole blackhole) {
         coarse.addLast(485567);
-    }
-
-    @Benchmark
-    @Group("coarse_most_read")
-    @GroupThreads(2)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void coarseMostReadRemoveFirst(Blackhole blackhole) {
+        blackhole.consume(coarse.removeLast());
         blackhole.consume(coarse.removeFirst());
     }
 
-    @Benchmark
-    @Group("coarse_most_read")
-    @GroupThreads(2)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void coarseMostReadRemoveLast(Blackhole blackhole) {
-        blackhole.consume(coarse.removeLast());
-    }
+//    @Benchmark
+//    @Group("coarse_most_read")
+//    @GroupThreads(2)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void coarseMostReadAddLast(Blackhole blackhole) {
+//        coarse.addLast(485567);
+//    }
+//
+//    @Benchmark
+//    @Group("coarse_most_read")
+//    @GroupThreads(2)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void coarseMostReadRemoveFirst(Blackhole blackhole) {
+//        blackhole.consume(coarse.removeFirst());
+//    }
+//
+//    @Benchmark
+//    @Group("coarse_most_read")
+//    @GroupThreads(2)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void coarseMostReadRemoveLast(Blackhole blackhole) {
+//        blackhole.consume(coarse.removeLast());
+//    }
 
     /**
      * most write test case
      */
     @Benchmark
     @Group("coarse_most_write")
-    @GroupThreads(1)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void coarseMostWritePeekFirst(Blackhole blackhole) {
-        blackhole.consume(coarse.peekFirst());
-    }
-
-    @Benchmark
-    @Group("coarse_most_write")
-    @GroupThreads(1)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void coarseMostWritePeekLast(Blackhole blackhole) {
-        blackhole.consume(coarse.peekLast());
-    }
-
-    @Benchmark
-    @Group("coarse_most_write")
     @GroupThreads(2)
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void coarseMostWriteSize(Blackhole blackhole) {
+    public void coarseMostWriteRead(Blackhole blackhole) {
+        blackhole.consume(coarse.peekFirst());
+        blackhole.consume(coarse.peekLast());
         blackhole.consume(coarse.size());
     }
 
+//    @Benchmark
+//    @Group("coarse_most_write")
+//    @GroupThreads(1)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void coarseMostWritePeekLast(Blackhole blackhole) {
+//        blackhole.consume(coarse.peekLast());
+//    }
+//
+//    @Benchmark
+//    @Group("coarse_most_write")
+//    @GroupThreads(2)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void coarseMostWriteSize(Blackhole blackhole) {
+//        blackhole.consume(coarse.size());
+//    }
+
     @Benchmark
     @Group("coarse_most_write")
-    @GroupThreads(7)
+    @GroupThreads(30)
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void coarseMostWriteAddFirst(Blackhole blackhole) {
+    public void coarseMostWriteWrite(Blackhole blackhole) {
         coarse.addFirst(48578);
-    }
-
-    @Benchmark
-    @Group("coarse_most_write")
-    @GroupThreads(7)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void coarseMostWriteAddLast(Blackhole blackhole) {
         coarse.addLast(485567);
-    }
-
-    @Benchmark
-    @Group("coarse_most_write")
-    @GroupThreads(7)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void coarseMostWriteRemoveFirst(Blackhole blackhole) {
+        blackhole.consume(coarse.removeLast());
         blackhole.consume(coarse.removeFirst());
     }
 
-    @Benchmark
-    @Group("coarse_most_write")
-    @GroupThreads(7)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void coarseMostWriteRemoveLast(Blackhole blackhole) {
-        blackhole.consume(coarse.removeLast());
-    }
+//    @Benchmark
+//    @Group("coarse_most_write")
+//    @GroupThreads(7)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void coarseMostWriteAddLast(Blackhole blackhole) {
+//        coarse.addLast(485567);
+//    }
+//
+//    @Benchmark
+//    @Group("coarse_most_write")
+//    @GroupThreads(7)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void coarseMostWriteRemoveFirst(Blackhole blackhole) {
+//        blackhole.consume(coarse.removeFirst());
+//    }
+//
+//    @Benchmark
+//    @Group("coarse_most_write")
+//    @GroupThreads(7)
+//    @BenchmarkMode(Mode.All)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void coarseMostWriteRemoveLast(Blackhole blackhole) {
+//        blackhole.consume(coarse.removeLast());
+//    }
 }
