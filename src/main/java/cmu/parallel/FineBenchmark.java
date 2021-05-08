@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Group)
 @Threads(32)
 public class FineBenchmark {
+    private int loop = 10000;
     private MyDeque<Integer> fine = new MyDeque<>();
 
     /**
@@ -24,9 +25,11 @@ public class FineBenchmark {
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void fineMostReadRead(Blackhole blackhole) {
-        blackhole.consume(fine.peekFirst());
-        blackhole.consume(fine.peekLast());
-        blackhole.consume(fine.size());
+        for (int i = 0; i < loop; i++) {
+            blackhole.consume(fine.peekFirst());
+            blackhole.consume(fine.peekLast());
+            blackhole.consume(fine.size());
+        }
     }
 
 //    @Benchmark
@@ -53,10 +56,12 @@ public class FineBenchmark {
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void fineMostReadWrite(Blackhole blackhole) {
-        fine.addFirst(48578);
-        fine.addLast(485567);
-        blackhole.consume(fine.removeLast());
-        blackhole.consume(fine.removeFirst());
+        for (int i = 0; i < loop; i++) {
+            fine.addFirst(48578);
+            fine.addLast(485567);
+            blackhole.consume(fine.removeLast());
+            blackhole.consume(fine.removeFirst());
+        }
     }
 
 //    @Benchmark
@@ -95,9 +100,11 @@ public class FineBenchmark {
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void fineMostWriteRead(Blackhole blackhole) {
-        blackhole.consume(fine.peekFirst());
-        blackhole.consume(fine.peekLast());
-        blackhole.consume(fine.size());
+        for (int i = 0; i < loop; i++) {
+            blackhole.consume(fine.peekFirst());
+            blackhole.consume(fine.peekLast());
+            blackhole.consume(fine.size());
+        }
     }
 
 //    @Benchmark
@@ -124,10 +131,12 @@ public class FineBenchmark {
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void fineMostWriteAddFirst(Blackhole blackhole) {
-        fine.addFirst(48578);
-        fine.addLast(485567);
-        blackhole.consume(fine.removeLast());
-        blackhole.consume(fine.removeFirst());
+        for (int i = 0; i < loop; i++) {
+            fine.addFirst(48578);
+            fine.addLast(485567);
+            blackhole.consume(fine.removeLast());
+            blackhole.consume(fine.removeFirst());
+        }
     }
 
 //    @Benchmark

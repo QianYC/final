@@ -14,6 +14,8 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Group)
 @Threads(32)
 public class BaselineBenchmark {
+    private int loop = 10000;
+
     private ConcurrentLinkedDeque<Integer> free = new ConcurrentLinkedDeque<>();
 
     /**
@@ -25,9 +27,11 @@ public class BaselineBenchmark {
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void freeMostReadRead(Blackhole blackhole) {
-        blackhole.consume(free.peekFirst());
-        blackhole.consume(free.peekLast());
-        blackhole.consume(free.size());
+        for (int i = 0; i < loop; i++) {
+            blackhole.consume(free.peekFirst());
+            blackhole.consume(free.peekLast());
+            blackhole.consume(free.size());
+        }
     }
 
 //    @Benchmark
@@ -54,10 +58,12 @@ public class BaselineBenchmark {
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void freeMostReadWrite(Blackhole blackhole) {
-        free.addFirst(48578);
-        free.addLast(485567);
-        blackhole.consume(free.removeLast());
-        blackhole.consume(free.removeFirst());
+        for (int i = 0; i < loop; i++) {
+            free.addFirst(48578);
+            free.addLast(485567);
+            blackhole.consume(free.removeLast());
+            blackhole.consume(free.removeFirst());
+        }
     }
 
 //    @Benchmark
@@ -96,9 +102,11 @@ public class BaselineBenchmark {
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void freeMostWriteRead(Blackhole blackhole) {
-        blackhole.consume(free.peekFirst());
-        blackhole.consume(free.peekLast());
-        blackhole.consume(free.size());
+        for (int i = 0; i < loop; i++) {
+            blackhole.consume(free.peekFirst());
+            blackhole.consume(free.peekLast());
+            blackhole.consume(free.size());
+        }
     }
 
 //    @Benchmark
@@ -125,10 +133,12 @@ public class BaselineBenchmark {
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void freeMostWriteWrite(Blackhole blackhole) {
-        free.addFirst(48578);
-        free.addLast(485567);
-        blackhole.consume(free.removeLast());
-        blackhole.consume(free.removeFirst());
+        for (int i = 0; i < loop; i++) {
+            free.addFirst(48578);
+            free.addLast(485567);
+            blackhole.consume(free.removeLast());
+            blackhole.consume(free.removeFirst());
+        }
     }
 
 //    @Benchmark

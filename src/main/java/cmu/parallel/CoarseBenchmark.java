@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Group)
 @Threads(32)
 public class CoarseBenchmark {
+    private int loop = 10000;
     private MyDeque<Integer> coarse = new MyDeque<>();
 
     /**
@@ -24,9 +25,11 @@ public class CoarseBenchmark {
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void coarseMostReadRead(Blackhole blackhole) {
-        blackhole.consume(coarse.peekFirst());
-        blackhole.consume(coarse.peekLast());
-        blackhole.consume(coarse.size());
+        for (int i = 0; i < loop; i++) {
+            blackhole.consume(coarse.peekFirst());
+            blackhole.consume(coarse.peekLast());
+            blackhole.consume(coarse.size());
+        }
     }
 
 //    @Benchmark
@@ -53,10 +56,12 @@ public class CoarseBenchmark {
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void coarseMostReadWrite(Blackhole blackhole) {
-        coarse.addFirst(48578);
-        coarse.addLast(485567);
-        blackhole.consume(coarse.removeLast());
-        blackhole.consume(coarse.removeFirst());
+        for (int i = 0; i < loop; i++) {
+            coarse.addFirst(48578);
+            coarse.addLast(485567);
+            blackhole.consume(coarse.removeLast());
+            blackhole.consume(coarse.removeFirst());
+        }
     }
 
 //    @Benchmark
@@ -95,9 +100,11 @@ public class CoarseBenchmark {
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void coarseMostWriteRead(Blackhole blackhole) {
-        blackhole.consume(coarse.peekFirst());
-        blackhole.consume(coarse.peekLast());
-        blackhole.consume(coarse.size());
+        for (int i = 0; i < loop; i++) {
+            blackhole.consume(coarse.peekFirst());
+            blackhole.consume(coarse.peekLast());
+            blackhole.consume(coarse.size());
+        }
     }
 
 //    @Benchmark
@@ -124,10 +131,12 @@ public class CoarseBenchmark {
     @BenchmarkMode(Mode.All)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public void coarseMostWriteWrite(Blackhole blackhole) {
-        coarse.addFirst(48578);
-        coarse.addLast(485567);
-        blackhole.consume(coarse.removeLast());
-        blackhole.consume(coarse.removeFirst());
+        for (int i = 0; i < loop; i++) {
+            coarse.addFirst(48578);
+            coarse.addLast(485567);
+            blackhole.consume(coarse.removeLast());
+            blackhole.consume(coarse.removeFirst());
+        }
     }
 
 //    @Benchmark
