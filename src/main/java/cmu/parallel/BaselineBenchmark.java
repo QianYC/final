@@ -13,6 +13,8 @@ import java.util.concurrent.TimeUnit;
  */
 @State(Scope.Group)
 @Threads(32)
+@BenchmarkMode(Mode.Throughput)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class BaselineBenchmark {
     private int loop = 10000;
 
@@ -20,43 +22,22 @@ public class BaselineBenchmark {
 
     /**
      * most read test case
-    */
+     */
     @Benchmark
     @Group("free_most_read")
     @GroupThreads(30)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    @OperationsPerInvocation(20000)
     public void freeMostReadRead(Blackhole blackhole) {
         for (int i = 0; i < loop; i++) {
             blackhole.consume(free.peekFirst());
             blackhole.consume(free.peekLast());
-            blackhole.consume(free.size());
         }
     }
-
-//    @Benchmark
-//    @Group("free_most_read")
-//    @GroupThreads(8)
-//    @BenchmarkMode(Mode.All)
-//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-//    public void freeMostReadPeekLast(Blackhole blackhole) {
-//        blackhole.consume(free.peekLast());
-//    }
-//
-//    @Benchmark
-//    @Group("free_most_read")
-//    @GroupThreads(8)
-//    @BenchmarkMode(Mode.All)
-//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-//    public void freeMostReadSize(Blackhole blackhole) {
-//        blackhole.consume(free.size());
-//    }
 
     @Benchmark
     @Group("free_most_read")
     @GroupThreads(2)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    @OperationsPerInvocation(40000)
     public void freeMostReadWrite(Blackhole blackhole) {
         for (int i = 0; i < loop; i++) {
             free.addFirst(48578);
@@ -66,72 +47,24 @@ public class BaselineBenchmark {
         }
     }
 
-//    @Benchmark
-//    @Group("free_most_read")
-//    @GroupThreads(2)
-//    @BenchmarkMode(Mode.All)
-//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-//    public void freeMostReadAddLast(Blackhole blackhole) {
-//        free.addLast(485567);
-//    }
-//
-//    @Benchmark
-//    @Group("free_most_read")
-//    @GroupThreads(2)
-//    @BenchmarkMode(Mode.All)
-//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-//    public void freeMostReadRemoveFirst(Blackhole blackhole) {
-//        blackhole.consume(free.removeFirst());
-//    }
-//
-//    @Benchmark
-//    @Group("free_most_read")
-//    @GroupThreads(2)
-//    @BenchmarkMode(Mode.All)
-//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-//    public void freeMostReadRemoveLast(Blackhole blackhole) {
-//        blackhole.consume(free.removeLast());
-//    }
-
     /**
      * most write test case
-    */
+     */
     @Benchmark
     @Group("free_most_write")
     @GroupThreads(2)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    @OperationsPerInvocation(20000)
     public void freeMostWriteRead(Blackhole blackhole) {
         for (int i = 0; i < loop; i++) {
             blackhole.consume(free.peekFirst());
             blackhole.consume(free.peekLast());
-            blackhole.consume(free.size());
         }
     }
-
-//    @Benchmark
-//    @Group("free_most_write")
-//    @GroupThreads(1)
-//    @BenchmarkMode(Mode.All)
-//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-//    public void freeMostWritePeekLast(Blackhole blackhole) {
-//        blackhole.consume(free.peekLast());
-//    }
-//
-//    @Benchmark
-//    @Group("free_most_write")
-//    @GroupThreads(2)
-//    @BenchmarkMode(Mode.All)
-//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-//    public void freeMostWriteSize(Blackhole blackhole) {
-//        blackhole.consume(free.size());
-//    }
 
     @Benchmark
     @Group("free_most_write")
     @GroupThreads(30)
-    @BenchmarkMode(Mode.All)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    @OperationsPerInvocation(40000)
     public void freeMostWriteWrite(Blackhole blackhole) {
         for (int i = 0; i < loop; i++) {
             free.addFirst(48578);
@@ -140,31 +73,4 @@ public class BaselineBenchmark {
             blackhole.consume(free.removeFirst());
         }
     }
-
-//    @Benchmark
-//    @Group("free_most_write")
-//    @GroupThreads(7)
-//    @BenchmarkMode(Mode.All)
-//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-//    public void freeMostWriteAddLast(Blackhole blackhole) {
-//        free.addLast(485567);
-//    }
-//
-//    @Benchmark
-//    @Group("free_most_write")
-//    @GroupThreads(7)
-//    @BenchmarkMode(Mode.All)
-//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-//    public void freeMostWriteRemoveFirst(Blackhole blackhole) {
-//        blackhole.consume(free.removeFirst());
-//    }
-//
-//    @Benchmark
-//    @Group("free_most_write")
-//    @GroupThreads(7)
-//    @BenchmarkMode(Mode.All)
-//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-//    public void freeMostWriteRemoveLast(Blackhole blackhole) {
-//        blackhole.consume(free.removeLast());
-//    }
 }

@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @author ycqian
  * @description double linked-list based deque
  */
-public class MyDeque<E> {
+public class RWDeque<E> {
     private Node<E> head, tail;
     private int size;
     private ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
