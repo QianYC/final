@@ -93,6 +93,7 @@ public class CASDeque<T> {
         return anchorCopy.head.value;
     }
 
+    // base
     public T removeLast() {
         Anchor<T> anchorCopy = null;
 
@@ -118,6 +119,54 @@ public class CASDeque<T> {
 
         return anchorCopy.tail.value;
     }
+
+
+    public T peekFirst() {
+        Anchor<T> anchorCopy = null;
+
+        while (true) {
+            anchorCopy = this.anchor.get();
+            if (anchorCopy.tail == null)
+                return null;
+
+            if (anchorCopy.head == anchorCopy.tail) {
+                break;
+            } else if (anchorCopy.status == STABLE){
+                if (!anchor.get().equals(anchorCopy))
+                    continue;
+
+                break;
+            } else {
+                stabilize(anchorCopy);
+            }
+        }
+
+        return anchorCopy.head.value;
+    }
+
+    public T peekLast() {
+        Anchor<T> anchorCopy = null;
+
+        while (true) {
+            anchorCopy = this.anchor.get();
+            if (anchorCopy.tail == null)
+                return null;
+
+            if (anchorCopy.head == anchorCopy.tail) {
+                break;
+            } else if (anchorCopy.status == STABLE){
+                if (!anchor.get().equals(anchorCopy))
+                    continue;
+
+                break;
+            } else {
+                stabilize(anchorCopy);
+            }
+        }
+
+        return anchorCopy.tail.value;
+    }
+
 
     private void stabilize(Anchor<T> anchor){
         if (anchor.status == RT_PUSH)
