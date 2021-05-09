@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class CASBenchmark {
     private int loop = 10000;
-    private cmu.parallel.CASDeque<Integer> cas = new cmu.parallel.CASDeque<>();
+    private cmu.parallel.CAS.CASDeque<Integer> cas = new cmu.parallel.CAS.CASDeque<>();
 
     /**
      * most read test case
