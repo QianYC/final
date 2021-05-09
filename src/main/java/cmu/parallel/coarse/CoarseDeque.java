@@ -4,7 +4,7 @@ package cmu.parallel.coarse;
  * @author ycqian
  * @description double linked-list based deque
  */
-public class MyDeque<E> {
+public class CoarseDeque<E> {
     private Node<E> head, tail;
     private int size;
 
