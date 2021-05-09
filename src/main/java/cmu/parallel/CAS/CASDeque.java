@@ -1,4 +1,4 @@
-package cmu.parallel;
+package cmu.parallel.CAS;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
