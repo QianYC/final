@@ -64,7 +64,7 @@ public class FineBenchmark {
     @Group("fine_most_write")
     @GroupThreads(30)
     @OperationsPerInvocation(40000)
-    public void fineMostWriteAddFirst(Blackhole blackhole) {
+    public void fineMostWriteWrite(Blackhole blackhole) {
         for (int i = 0; i < loop; i++) {
             fine.addFirst(48578);
             fine.addLast(485567);

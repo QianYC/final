@@ -63,7 +63,7 @@ public class RWBenchmark {
     @Group("rw_most_write")
     @GroupThreads(30)
     @OperationsPerInvocation(40000)
-    public void rwMostWriteAddFirst(Blackhole blackhole) {
+    public void rwMostWriteWrite(Blackhole blackhole) {
         for (int i = 0; i < loop; i++) {
             rw.addFirst(48578);
             rw.addLast(485567);
