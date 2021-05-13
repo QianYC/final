@@ -36,4 +36,46 @@ public class TicketBenchmark {
         blackhole.consume(deque.removeFirst());
         blackhole.consume(deque.removeLast());
     }
+
+    @Benchmark
+    @Fork(value = 1, warmups = 1)
+    @OperationsPerInvocation(8)
+    public void r3w1(Blackhole blackhole) {
+        blackhole.consume(deque.peekFirst());
+        deque.addFirst(1);
+        blackhole.consume(deque.peekFirst());
+        blackhole.consume(deque.peekFirst());
+        blackhole.consume(deque.peekLast());
+        blackhole.consume(deque.removeLast());
+        blackhole.consume(deque.peekLast());
+        blackhole.consume(deque.peekLast());
+    }
+
+    @Benchmark
+    @Fork(value = 1, warmups = 1)
+    @OperationsPerInvocation(8)
+    public void r2w2(Blackhole blackhole) {
+        blackhole.consume(deque.peekFirst());
+        deque.addFirst(1);
+        blackhole.consume(deque.peekFirst());
+        deque.addFirst(1);
+        blackhole.consume(deque.removeLast());
+        blackhole.consume(deque.peekLast());
+        blackhole.consume(deque.removeFirst());
+        blackhole.consume(deque.peekLast());
+    }
+
+    @Benchmark
+    @Fork(value = 1, warmups = 1)
+    @OperationsPerInvocation(8)
+    public void r1w3(Blackhole blackhole) {
+        blackhole.consume(deque.peekFirst());
+        deque.addFirst(1);
+        deque.addFirst(1);
+        deque.addFirst(1);
+        blackhole.consume(deque.peekFirst());
+        blackhole.consume(deque.removeFirst());
+        blackhole.consume(deque.removeFirst());
+        blackhole.consume(deque.removeFirst());
+    }
 }
